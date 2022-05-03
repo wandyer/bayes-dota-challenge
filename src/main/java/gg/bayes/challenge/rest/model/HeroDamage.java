@@ -10,4 +10,10 @@ public class HeroDamage {
     private Integer damageInstances;
     @JsonProperty("total_damage")
     private Integer totalDamage;
+
+    public HeroDamage(String target, Long damageInstances, Long totalDamage) {
+        this.target = target;
+        this.damageInstances = damageInstances.intValue();
+        this.totalDamage = totalDamage.intValue();
+    }
 }
