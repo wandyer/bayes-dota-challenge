@@ -28,8 +28,7 @@ public class MatchController {
 
     @PostMapping(consumes = "text/plain")
     public ResponseEntity<Long> ingestMatch(@RequestBody @NotNull @NotBlank String payload) {
-        final Long matchId = matchService.ingestMatch(payload);
-        return ResponseEntity.ok(matchId);
+        return ResponseEntity.ok(matchService.ingestMatch(payload));
     }
 
     @GetMapping("{matchId}")
