@@ -4,6 +4,10 @@ import gg.bayes.challenge.entity.Event;
 import gg.bayes.challenge.entity.Match;
 import gg.bayes.challenge.parser.impl.*;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 public class MatchProcessor {
 
     private final BuyEventParser buyEventParser = new BuyEventParser();
@@ -20,7 +24,8 @@ public class MatchProcessor {
         spellCastEventParser.setNextChain(ignoredEventParser);
     }
 
-    public Event processMatchEvent(String matchEventLog, Match match) {
-        return buyEventParser.processMatchEvent(matchEventLog, match);
+    public List<Event> processLogs(String matchLogs, Match match) {
+        return matchLogs.lines().map(line -> buyEventParser.processMatchEvent(line, match))
+                .filter(Objects::nonNull).collect(Collectors.toList());
     }
 }

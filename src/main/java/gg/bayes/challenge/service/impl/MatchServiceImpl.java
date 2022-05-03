@@ -13,8 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -41,8 +39,7 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public Long ingestMatch(String payload) {
         Match match = new Match();
-        List<Event> matchEvents = payload.lines().map(line -> matchProcessor.processMatchEvent(line, match))
-                .filter(Objects::nonNull).collect(Collectors.toList());
+        List<Event> matchEvents = matchProcessor.processLogs(payload, match);
         match.setEvents(matchEvents);
         matchRepository.save(match);
         return match.getId();
