@@ -1,5 +1,7 @@
-package gg.bayes.challenge.parser;
+package gg.bayes.challenge.service;
 
+import gg.bayes.challenge.entity.Event;
+import gg.bayes.challenge.entity.Match;
 import gg.bayes.challenge.parser.impl.*;
 
 public class MatchProcessor {
@@ -18,7 +20,7 @@ public class MatchProcessor {
         spellCastEventParser.setNextChain(ignoredEventParser);
     }
 
-    public void processMatchEvent(String matchEventLog) {
-        buyEventParser.processMatchEvent(matchEventLog);
+    public Event processMatchEvent(String matchEventLog, Match match) {
+        return buyEventParser.processMatchEvent(matchEventLog, match);
     }
 }
